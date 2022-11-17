@@ -1,0 +1,26 @@
+.market-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 3px;
+}
+
+.market-item {
+  border: 1px solid rgba(0.3);
+  background: wheat;
+  padding: 8px 20px;
+  color: rgba(250, 255, 255, 0.9);
+  border-radius: 3px;
+  line-height: 15px;
+  font-size: 12px;
+  transition: ease-in-out 0.5s;
+}
+
+.market-item-red {
+  background: rgb(255, 10, 10);
+}
+
+.market-item-green {
+  background: #04a73b;
+}

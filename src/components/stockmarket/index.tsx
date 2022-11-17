@@ -1,29 +1,45 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import "assets/styles/css/market.css";
 const StockMarket = () => {
   const [values, setValues] = useState<object[]>([]);
-  useEffect(() => {
-    async function getValues() {
-      try {
-        const res: any = await axios.get(
-          "https://query1.finance.yahoo.com/v7/finance/quote?symbols=USDTRY=X,eurtry=x"
-        );
-        setValues(res.quoteResponse.result);
-      } catch (error) {}
+  const [loading, setLoading] = useState(false);
+
+  async function getValues() {
+    try {
+      const { data } = await axios.get("http://localhost:10000/finans");
+      setValues(data.quoteResponse!.result);
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useLayoutEffect(() => {
+    setLoading(true);
+    getValues();
+  }, []);
+
+  useEffect(() => {
     let intervalID = setInterval(getValues, 5000);
     return () => clearInterval(intervalID);
   }, []);
-  console.log(values);
 
   return (
-    <div>
+    <div className="market-wrapper">
+      {loading && <div>Yükleniyor...</div>}
       {values.map((item: any, index: number) => (
-        <div key={index}>
-          <div>{item.symbol}</div>
+        <div
+          key={index}
+          className={`market-item${
+            item.regularMarketChangePercent < 0
+              ? " market-item-red"
+              : " market-item-green"
+          }`}
+        >
+          <div>{item.shortName}</div>
           <div>{item.bid}</div>
-          <div>{item.regularMarketChangePercent}</div>
+          <div>% {item.regularMarketChangePercent.toFixed(2)}</div>
         </div>
       ))}
     </div>
