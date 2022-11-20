@@ -7,7 +7,7 @@ const StockMarket = () => {
 
   async function getValues() {
     try {
-      const { data } = await axios.get("http://localhost:10000/finans");
+      const { data } = await axios.get("/finans");
       setValues(data.quoteResponse!.result);
     } catch (error) {
     } finally {
