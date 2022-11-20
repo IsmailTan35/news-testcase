@@ -33,7 +33,6 @@ function App() {
   useEffect(() => {
     async function authCheck() {
       const token = localStorage.getItem("token");
-      if (!token) return;
       try {
         await axios.post("/auth/check", {
           token,
