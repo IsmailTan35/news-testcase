@@ -15,7 +15,7 @@ const NewsCard = (props: IProps) => {
       <div className="newscard-container">
         <div className="newscard-image-wrapper">
           <img
-            src={`http://localhost:10000/newspicture/${data.newsPicture}`}
+            src={`https://newstestcasebackend.vercel.app/newspicture/${data.newsPicture}`}
             alt={data.title}
           />
         </div>
