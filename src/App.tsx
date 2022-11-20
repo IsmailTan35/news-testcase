@@ -18,14 +18,12 @@ function App() {
 
   useEffect(() => {
     async function authCheckJwt() {
-      const token = localStorage.getItem("token");
-      if (!token) return;
       try {
-        const { data } = await axios.post("/auth/check/jwt", {
-          token,
-        });
+        const { data } = await axios.post("/auth/check/jwt");
         dispatch(adminActions.refresh(data));
-      } catch (error) {}
+      } catch (error) {
+        navigate("/");
+      }
     }
     authCheckJwt();
   }, []);
@@ -43,7 +41,7 @@ function App() {
         }
       }
     }
-    authCheck();
+    // authCheck();
   }, [location.pathname]);
 
   return (

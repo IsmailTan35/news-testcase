@@ -20,6 +20,7 @@ const Header = () => {
   const handleAuthLogout = async () => {
     localStorage.removeItem("token");
     dispatch(adminActions.delete());
+    navigate("/");
   };
 
   const handleCloseModal = () => {
