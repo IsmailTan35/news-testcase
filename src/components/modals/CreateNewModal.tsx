@@ -8,6 +8,7 @@ import CustomInputArea from "components/custominputarea";
 import CostumInputImage from "components/custominputfile";
 import { newsActions } from "redux/store/news";
 import { useAppDispatch } from "redux/store";
+import { toast } from "react-toastify";
 
 interface MyFormValues {
   title: string;
@@ -55,8 +56,9 @@ const CreateNewModal = (props: IProps) => {
       dispatch(newsActions.refresh(res.data));
 
       setTimeout(() => setShow(), 10);
+      toast.success("Haber oluşturuldu.");
     } catch (error) {
-      console.error(error);
+      toast.error("Hata! Tekrar deneyin");
     }
   }
 

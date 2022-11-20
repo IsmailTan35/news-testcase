@@ -5,6 +5,7 @@ import "assets/styles/css/loginmodal.css";
 import axios from "axios";
 import { useAppDispatch } from "redux/store";
 import { newsActions } from "redux/store/news";
+import { toast } from "react-toastify";
 
 interface IProps {
   setShow?: any;
@@ -19,8 +20,9 @@ const DeleteNewsModal = (props: IProps) => {
       const res = await axios.delete("/news", { data: { id: data } });
       setShow();
       dispatch(newsActions.refresh(res.data));
+      toast.success("Başarıyla silindi.");
     } catch (error) {
-      console.error(error);
+      toast.error("Tekrar deneyin.");
     }
   }
 

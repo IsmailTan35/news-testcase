@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import CustomInput from "components/custominput";
 import axios from "axios";
 import { adminActions, useAppDispatch } from "redux/store";
+import { toast } from "react-toastify";
 interface MyFormValues {
   email: string;
   password: string;
@@ -37,7 +38,10 @@ const RegisterModal = (props: IProps) => {
       axios.defaults.headers.common["Authorization"] = res.data.token;
 
       dispatch(adminActions.refresh(res.data));
-    } catch (error) {}
+      toast.success("Giriş başarılı.");
+    } catch (error) {
+      toast.error("Giriş başarısız.");
+    }
   };
 
   return (

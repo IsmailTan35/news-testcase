@@ -4,6 +4,7 @@ import "assets/styles/css/loginmodal.css";
 import * as Yup from "yup";
 import CustomInput from "components/custominput";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 interface MyFormValues {
   fullName: string;
@@ -48,7 +49,10 @@ const RegisterModal = (props: IProps) => {
         email: values.email,
         password: values.password,
       });
-    } catch (error) {}
+      toast.success("Kayıt başarılı.");
+    } catch (error) {
+      toast.error("Kayıt başarısız.");
+    }
   };
 
   return (
