@@ -16,8 +16,10 @@ const ModalWrapper: React.FC<IProps> = ({
       <div className="modal-container">
         <div className="modal-backdrop" onClick={setShow} />
         <div className="modal">
-          <div className="modal-close-btn-wrapper" onClick={setShow}>
-            <div className="modal-close-btn">X</div>
+          <div className="modal-close-btn-wrapper">
+            <div className="modal-close-btn" onClick={setShow}>
+              X
+            </div>
           </div>
           {children}
         </div>

@@ -6,13 +6,7 @@ import { Outlet } from "react-router-dom";
 const Main = () => {
   return (
     <>
-      <div
-        className="main-wrapper"
-        style={{
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
+      <div className="main-wrapper">
         <Header />
         <StockMarket />
         <Outlet />

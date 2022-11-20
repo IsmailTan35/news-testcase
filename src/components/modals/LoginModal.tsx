@@ -34,6 +34,8 @@ const RegisterModal = (props: IProps) => {
         password: values.password,
       });
       localStorage.setItem("token", res.data.token);
+      axios.defaults.headers.common["Authorization"] = res.data.token;
+
       dispatch(adminActions.refresh(res.data));
     } catch (error) {}
   };

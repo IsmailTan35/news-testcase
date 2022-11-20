@@ -1,0 +1,19 @@
+.custominputfile::-webkit-file-upload-button {
+  display: none;
+}
+.custominputfile::before {
+  display: inline-block;
+  background: none;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+.custominputfile:hover::before {
+  border-color: black;
+}
+.custominputfile:active::before {
+  background: none;
+}
