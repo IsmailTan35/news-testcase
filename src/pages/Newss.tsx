@@ -23,13 +23,16 @@ const News = () => {
     <>
       <div className="panel-wrapper">
         <div className="panel-container">
-          <div className="panel-table" style={{ padding: 20 }}>
-            <div className="news">
-              {news &&
-                news.length > 0 &&
-                news.map((item, index) => <NewsCard data={item} key={index} />)}
+          {news.length > 0 && (
+            <div className="panel-table" style={{ padding: 20 }}>
+              <div className="news">
+                {news.length > 0 &&
+                  news.map((item, index) => (
+                    <NewsCard data={item} key={index} />
+                  ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>
