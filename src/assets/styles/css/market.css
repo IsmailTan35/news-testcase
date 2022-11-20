@@ -4,18 +4,21 @@
   justify-content: center;
   margin-top: 10px;
   gap: 3px;
+  padding-bottom: 10px;
 }
 
 .market-item {
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
   background: wheat;
-  padding: 3px 10px;
+  padding: 10px 20px;
   color: rgba(250, 255, 255, 0.9);
   border-radius: 3px;
-  line-height: 12px;
-  font-size: 10px;
+  line-height: 16px;
+  font-size: 15px;
   transition: ease-in-out 0.5s;
+  justify-content: space-between;
+  align-items: stretch;
 }
 
 .market-item-red {

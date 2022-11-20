@@ -5,6 +5,7 @@ import Main from "layout/Main";
 import axios from "axios";
 import Panel from "pages/Panel";
 import { adminActions, useAppDispatch } from "redux/store";
+import News from "pages/Newss";
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === "production"
@@ -50,6 +51,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Main />}>
+          <Route path="/" element={<News />} />
           <Route path="/panel" element={<Panel />} />
         </Route>
       </Routes>

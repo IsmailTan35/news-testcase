@@ -5,3 +5,10 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.news {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

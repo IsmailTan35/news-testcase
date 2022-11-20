@@ -6,7 +6,8 @@ interface IInput {
   placeholder?: string;
   error?: boolean;
   onChange?: any;
-  value?: string;
+  value?: any;
+  value2?: any;
   icon?: any;
   name?: string;
   id?: string;
@@ -14,7 +15,7 @@ interface IInput {
 
 const CostumInputImage = (props: IInput) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { placeholder, icon, onChange, id, name, error } = props;
+  const { placeholder, icon, onChange, id, name, error, value, value2 } = props;
   const [focus, setFocus] = useState(false);
   const [active, setActive] = useState(false);
 
@@ -39,6 +40,15 @@ const CostumInputImage = (props: IInput) => {
     if (!e.target.value || e.target.value === "") return;
     setActive(true);
   };
+
+  useEffect(() => {
+    let count = false;
+    if (count || !value || !inputRef || !inputRef.current) return;
+    setActive(true);
+    return () => {
+      count = true;
+    };
+  }, [inputRef, value]);
 
   return (
     <>
@@ -70,7 +80,24 @@ const CostumInputImage = (props: IInput) => {
           className="custominput custominputfile"
           ref={inputRef}
           accept="image/png, image/gif, image/jpeg"
+          placeholder="2131"
+          style={{ display: "none" }}
         />
+
+        <label
+          htmlFor={id}
+          style={{
+            width: "100%",
+            height: "100%",
+            cursor: "pointer",
+          }}
+        >
+          {value !== null
+            ? value.name
+            : value2 !== null
+            ? "Resim Değiştir"
+            : "Resim Ekle"}
+        </label>
         <div>{icon}</div>
       </div>
     </>

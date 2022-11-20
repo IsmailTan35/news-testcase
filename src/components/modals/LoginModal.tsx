@@ -68,6 +68,7 @@ const RegisterModal = (props: IProps) => {
                 placeholder="Şifre"
                 onChange={handleChange}
                 error={submitCount === 0 || !errors.password}
+                type="password"
               />
               {submitCount !== 0 && (
                 <div className="modal-form-error">{errors.password}</div>

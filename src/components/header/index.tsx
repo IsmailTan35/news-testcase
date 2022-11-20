@@ -27,8 +27,8 @@ const Header = () => {
     setModalName("login");
   };
 
-  const handleClickNavigate = () => {
-    navigate("/panel");
+  const handleClickNavigate = (url: string) => {
+    navigate(url);
   };
 
   useEffect(() => {
@@ -45,12 +45,20 @@ const Header = () => {
           </div>
           <div className="header-right-wrapper">
             {isLogin && (
-              <button
-                className="header-right-panel-btn"
-                onClick={handleClickNavigate}
-              >
-                Panel
-              </button>
+              <>
+                <button
+                  className="header-right-panel-btn"
+                  onClick={() => handleClickNavigate("/")}
+                >
+                  Haberler
+                </button>
+                <button
+                  className="header-right-panel-btn"
+                  onClick={() => handleClickNavigate("/panel")}
+                >
+                  Panel
+                </button>
+              </>
             )}
             <button
               className="header-right-auth-btn"

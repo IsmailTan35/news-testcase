@@ -6,17 +6,19 @@ import CustomInput from "components/custominput";
 import axios from "axios";
 import CustomInputArea from "components/custominputarea";
 import CostumInputImage from "components/custominputfile";
-import { newsActions } from "redux/store/news";
 import { useAppDispatch } from "redux/store";
+import { newsActions } from "redux/store/news";
 
 interface MyFormValues {
   title: string;
   content: string;
   newsPicture: any;
+  id: any;
 }
 
 interface IProps {
   setShow?: any;
+  data?: any;
 }
 
 const formSchema = Yup.object().shape({
@@ -29,32 +31,34 @@ const formSchema = Yup.object().shape({
     .required("Boşlukları dodlurunuz.")
     .min(6, "En az 6 karakterden oluşmalıdır.")
     .max(250, "En fazla 250 karakterden oluşmalıdır."),
-  newsPicture: Yup.mixed().required("Haber için resim yükleyiniz."),
+  newsPicture: Yup.mixed(),
 });
 
-const CreateNewModal = (props: IProps) => {
-  const { setShow } = props;
+const UpdateNewModal = (props: IProps) => {
+  const { setShow, data } = props;
   const dispatch = useAppDispatch();
   const initialValues: MyFormValues = {
-    title: "",
-    content: "",
+    id: data._id,
+    title: data.title,
+    content: data.content,
     newsPicture: null,
   };
 
   async function handleSubmit(values: any, actions: any) {
     const formData = new FormData();
+    formData.append("id", values.id);
     formData.append("title", values.title);
     formData.append("content", values.content);
     formData.set("newsPicture", values.newsPicture);
+
     try {
-      const res = await axios.post("/news", formData, {
+      const res = await axios.put("/news", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       dispatch(newsActions.refresh(res.data));
-
-      setTimeout(() => setShow(), 10);
+      setShow();
     } catch (error) {
       console.error(error);
     }
@@ -68,6 +72,7 @@ const CreateNewModal = (props: IProps) => {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={formSchema}
+          enableReinitialize
         >
           {({ errors, handleChange, submitCount, setFieldValue, values }) => {
             return (
@@ -78,6 +83,7 @@ const CreateNewModal = (props: IProps) => {
                   placeholder="Haber Başlığı"
                   onChange={handleChange}
                   error={submitCount === 0 || !errors.title}
+                  value={values.title}
                 />
                 {submitCount !== 0 && (
                   <div className="modal-form-error">{errors.title}</div>
@@ -88,6 +94,7 @@ const CreateNewModal = (props: IProps) => {
                   placeholder="Haber İçeriği"
                   onChange={handleChange}
                   error={submitCount === 0 || !errors.content}
+                  value={values.content}
                 />
                 {submitCount !== 0 && (
                   <div className="modal-form-error">{errors.content}</div>
@@ -100,16 +107,14 @@ const CreateNewModal = (props: IProps) => {
                     setFieldValue("newsPicture", e.currentTarget.files[0]);
                   }}
                   error={submitCount === 0 || !errors.newsPicture}
-                  value={null}
-                  value2={values.newsPicture}
+                  value={values.newsPicture}
+                  value2={data.newsPicture}
                 />
-
                 <div className="modal-form-error">
                   <ErrorMessage name="newsPicture" />
                 </div>
-
                 <button type="submit" className="modal-btn-submit ">
-                  Oluştur
+                  Güncelle
                 </button>
               </Form>
             );
@@ -120,4 +125,4 @@ const CreateNewModal = (props: IProps) => {
   );
 };
 
-export default CreateNewModal;
+export default UpdateNewModal;

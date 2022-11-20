@@ -12,7 +12,7 @@ interface IInput {
 
 const CustomInputArea = (props: IInput) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { placeholder, icon, onChange, id, name, error } = props;
+  const { placeholder, icon, onChange, id, name, error, value } = props;
   const [focus, setFocus] = useState(false);
   const [active, setActive] = useState(false);
 
@@ -37,7 +37,16 @@ const CustomInputArea = (props: IInput) => {
     if (!e.target.value || e.target.value === "") return;
     setActive(true);
   };
+  useEffect(() => {
+    let count = false;
 
+    if (count || !value || !inputRef || !inputRef.current) return;
+    inputRef.current.value = value;
+    setActive(true);
+    return () => {
+      count = true;
+    };
+  }, [inputRef, value]);
   return (
     <>
       <div
@@ -71,6 +80,7 @@ const CustomInputArea = (props: IInput) => {
             maxHeight: 220,
           }}
           maxLength={250}
+          value={value}
         />
         <div>{icon}</div>
       </div>

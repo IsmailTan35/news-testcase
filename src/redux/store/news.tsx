@@ -1,9 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-interface IAction {
-  payload: { name: "id" | "password"; value: any };
-}
-
 interface IState {
   items: object[];
 }
@@ -16,13 +12,11 @@ const { reducer, actions } = createSlice({
   name: "news",
   initialState: data,
   reducers: {
-    refresh(state: IState, action: IAction) {
-      const { name, value } = action.payload;
-      state.items = value;
+    refresh(state, action) {
+      state.items = action.payload;
     },
-    update(state: IState, action: IAction) {
-      const { name, value } = action.payload;
-      state.items.push(value);
+    update(state, action) {
+      state.items.push(action.payload);
     },
   },
 });

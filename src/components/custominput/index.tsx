@@ -8,11 +8,12 @@ interface IInput {
   icon?: any;
   name?: string;
   id?: string;
+  type?: string;
 }
 
 const CostumInput = (props: IInput) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { placeholder, icon, onChange, id, name, error } = props;
+  const { placeholder, icon, onChange, id, name, error, type, value } = props;
   const [focus, setFocus] = useState(false);
   const [active, setActive] = useState(false);
 
@@ -38,6 +39,16 @@ const CostumInput = (props: IInput) => {
     setActive(true);
   };
 
+  useEffect(() => {
+    let count = false;
+    if (count || !value || !inputRef || !inputRef.current) return;
+    inputRef.current.value = value;
+    setActive(true);
+    return () => {
+      count = true;
+    };
+  }, [inputRef, value]);
+
   return (
     <>
       <div
@@ -59,6 +70,8 @@ const CostumInput = (props: IInput) => {
           onBlur={handleBlur}
           className="custominput"
           ref={inputRef}
+          type={type}
+          value={value}
         />
         <div>{icon}</div>
       </div>
