@@ -1,6 +1,7 @@
 import Header from "components/header";
 import StockMarket from "components/stockmarket";
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const Main = () => {
   return (
@@ -14,6 +15,7 @@ const Main = () => {
       >
         <Header />
         <StockMarket />
+        <Outlet />
       </div>
     </>
   );

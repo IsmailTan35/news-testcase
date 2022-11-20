@@ -5,30 +5,27 @@ interface IAction {
 }
 
 interface IState {
-  id: string | null;
-  [key: string]: any;
+  items: object[];
 }
 
 let data: IState = {
-  id: null,
+  items: [],
 };
 
 const { reducer, actions } = createSlice({
-  name: "user",
-
+  name: "news",
   initialState: data,
-
   reducers: {
     refresh(state: IState, action: IAction) {
       const { name, value } = action.payload;
-      state[name] = value;
+      state.items = value;
     },
     update(state: IState, action: IAction) {
       const { name, value } = action.payload;
-      state[name].push(value);
+      state.items.push(value);
     },
   },
 });
 
-export { actions as userActions };
-export { reducer as userReducer };
+export { actions as newsActions };
+export { reducer as newsReducer };

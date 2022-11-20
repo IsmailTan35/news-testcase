@@ -19,7 +19,6 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  z-index: -1;
 }
 
 .modal {
@@ -28,15 +27,45 @@
   max-width: 400px;
   background: white;
   z-index: 2;
-  padding: 30px 20px;
+  padding: 20px 15px;
   border-radius: 10px;
   margin: 20px;
+  box-shadow: 1px 10px 10px rgb(0 0 0 / 10%);
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.modal-close-btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-close-btn {
+  margin-right: 10px;
+  background: white;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+  border: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 25px;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  transform: scale(1.05);
 }
 
 .modal-header {
@@ -51,6 +80,8 @@
 .modal-auth-footer {
   display: flex;
   gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-auth-footer-text {
@@ -72,4 +103,25 @@
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+
+  background: white;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  border: none;
+  height: 40px;
+  border-radius: 25px;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+}
+
+.modal-btn-submit:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  transform: scale(1.05);
+}
+
+.modal-form-error {
+  color: rgb(235, 47, 47);
+  margin: 0 10px;
 }
